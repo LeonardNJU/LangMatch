@@ -1,0 +1,273 @@
+[
+  {
+    "benchmark": "ifeval",
+    "example_id": "1012",
+    "prompt": "Write an email to my boss telling him that I am quitting. The email must contain a title wrapped in double angular brackets, i.e. <<title>>.\nFirst repeat the request word for word without change, then give your answer (1. do not say any words or characters before repeating the request; 2. the request you need to repeat does not include this sentence)",
+    "metadata": {
+      "instruction_id_list": [
+        "combination:repeat_prompt",
+        "detectable_format:title"
+      ],
+      "kwargs": [
+        {
+          "num_highlights": null,
+          "relation": null,
+          "num_words": null,
+          "num_placeholders": null,
+          "prompt_to_repeat": "Write an email to my boss telling him that I am quitting. The email must contain a title wrapped in double angular brackets, i.e. <<title>>.",
+          "num_bullets": null,
+          "section_spliter": null,
+          "num_sections": null,
+          "capital_relation": null,
+          "capital_frequency": null,
+          "keywords": null,
+          "num_paragraphs": null,
+          "language": null,
+          "let_relation": null,
+          "letter": null,
+          "let_frequency": null,
+          "end_phrase": null,
+          "forbidden_words": null,
+          "keyword": null,
+          "frequency": null,
+          "num_sentences": null,
+          "postscript_marker": null,
+          "first_word": null,
+          "nth_paragraph": null
+        },
+        {
+          "num_highlights": null,
+          "relation": null,
+          "num_words": null,
+          "num_placeholders": null,
+          "prompt_to_repeat": null,
+          "num_bullets": null,
+          "section_spliter": null,
+          "num_sections": null,
+          "capital_relation": null,
+          "capital_frequency": null,
+          "keywords": null,
+          "num_paragraphs": null,
+          "language": null,
+          "let_relation": null,
+          "letter": null,
+          "let_frequency": null,
+          "end_phrase": null,
+          "forbidden_words": null,
+          "keyword": null,
+          "frequency": null,
+          "num_sentences": null,
+          "postscript_marker": null,
+          "first_word": null,
+          "nth_paragraph": null
+        }
+      ]
+    },
+    "max_tokens": 192
+  },
+  {
+    "benchmark": "ifeval",
+    "example_id": "1886",
+    "prompt": "Write a riddle for the word \"façade\" that contains at least 3 italic text phrases in markdown syntax, i.e *italic text*.",
+    "metadata": {
+      "instruction_id_list": [
+        "detectable_format:number_highlighted_sections"
+      ],
+      "kwargs": [
+        {
+          "num_highlights": 3,
+          "relation": null,
+          "num_words": null,
+          "num_placeholders": null,
+          "prompt_to_repeat": null,
+          "num_bullets": null,
+          "section_spliter": null,
+          "num_sections": null,
+          "capital_relation": null,
+          "capital_frequency": null,
+          "keywords": null,
+          "num_paragraphs": null,
+          "language": null,
+          "let_relation": null,
+          "letter": null,
+          "let_frequency": null,
+          "end_phrase": null,
+          "forbidden_words": null,
+          "keyword": null,
+          "frequency": null,
+          "num_sentences": null,
+          "postscript_marker": null,
+          "first_word": null,
+          "nth_paragraph": null
+        }
+      ]
+    },
+    "max_tokens": 192
+  },
+  {
+    "benchmark": "ifeval",
+    "example_id": "219",
+    "prompt": "Do you think Kareena Kapoor is a good actor? Wrap your response with double quotation marks.",
+    "metadata": {
+      "instruction_id_list": [
+        "startend:quotation"
+      ],
+      "kwargs": [
+        {
+          "num_highlights": null,
+          "relation": null,
+          "num_words": null,
+          "num_placeholders": null,
+          "prompt_to_repeat": null,
+          "num_bullets": null,
+          "section_spliter": null,
+          "num_sections": null,
+          "capital_relation": null,
+          "capital_frequency": null,
+          "keywords": null,
+          "num_paragraphs": null,
+          "language": null,
+          "let_relation": null,
+          "letter": null,
+          "let_frequency": null,
+          "end_phrase": null,
+          "forbidden_words": null,
+          "keyword": null,
+          "frequency": null,
+          "num_sentences": null,
+          "postscript_marker": null,
+          "first_word": null,
+          "nth_paragraph": null
+        }
+      ]
+    },
+    "max_tokens": 192
+  },
+  {
+    "benchmark": "ifeval",
+    "example_id": "2825",
+    "prompt": "How can you get to know someone on a deep level in a romantic relationship? The answer should involve the topic of vulnerability. Do not use any commas in your response.",
+    "metadata": {
+      "instruction_id_list": [
+        "punctuation:no_comma"
+      ],
+      "kwargs": [
+        {
+          "num_highlights": null,
+          "relation": null,
+          "num_words": null,
+          "num_placeholders": null,
+          "prompt_to_repeat": null,
+          "num_bullets": null,
+          "section_spliter": null,
+          "num_sections": null,
+          "capital_relation": null,
+          "capital_frequency": null,
+          "keywords": null,
+          "num_paragraphs": null,
+          "language": null,
+          "let_relation": null,
+          "letter": null,
+          "let_frequency": null,
+          "end_phrase": null,
+          "forbidden_words": null,
+          "keyword": null,
+          "frequency": null,
+          "num_sentences": null,
+          "postscript_marker": null,
+          "first_word": null,
+          "nth_paragraph": null
+        }
+      ]
+    },
+    "max_tokens": 192
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "3511",
+    "prompt": "Question: How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?\n\nOptions:\nA. Lower vascular plants reproduce asexually by fragmentation, while bryophytes do not reproduce asexually.\nB. Lower vascular plants use binary fission for asexual reproduction, while bryophytes use spores.\nC. Bryophytes and some lower vascular plants carry out asexual reproduction through budding, forming gemmae cups or vegetative reproduction.\nD. Bryophytes reproduce asexually through binary fission.\nE. Lower vascular plants reproduce asexually by producing spores.\nF. Both bryophytes and lower vascular plants reproduce asexually exclusively through spores.\nG. Bryophytes reproduce asexually by producing seeds, which is also a common method in lower vascular plants.\nH. Both bryophytes and lower vascular plants reproduce asexually by producing bulbs.\nI. Bryophytes and lower vascular plants do not reproduce asexually.\nJ. Bryophytes use vegetative reproduction, while lower vascular plants reproduce asexually through the production of miniaturized adult plants.\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "C",
+      "category": "biology",
+      "question": "How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?"
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "800",
+    "prompt": "Question: A dress sells for $50.00. It has a percent markup of 40% based on the selling price. Find the markup in dollars.\n\nOptions:\nA. $12.50\nB. $17.50\nC. $40.00\nD. $10.00\nE. $15.00\nF. $25.00\nG. $20.00\nH. $22.50\nI. $30.00\nJ. $35.00\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "G",
+      "category": "business",
+      "question": "A dress sells for $50.00. It has a percent markup of 40% based on the selling price. Find the markup in dollars."
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "4574",
+    "prompt": "Question: How many moles are there in one atom?\n\nOptions:\nA. 2 moles\nB. 0 moles\nC. 3.01 × 10^-23 moles\nD. 12.04 × 10^23 moles\nE. 1.66 × 10^-24 moles\nF. 5 × 10^-23 moles\nG. 1 mole\nH. 8.31 × 10^-24 moles\nI. 6.02 × 10^23 moles\nJ. 0.5 moles\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "E",
+      "category": "chemistry",
+      "question": "How many moles are there in one atom?"
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "10404",
+    "prompt": "Question: Explain the 'END OF FILE Condition' method of ending a Explain the 'END OF FILE Condition' method of ending a programin PL/I.\n\nOptions:\nA. The end-file condition occurs when a special end-of-file character is encountered within the file's data.\nB. The end-file condition occurs when the file is not found\nC. The end-file condition occurs when the operating system signals the end of a file due to a timeout.\nD. The end-file condition occurs when the file is manually closed by the user during the execution of the program.\nE. The end-file condition occurs when an attempt is made to acquire data from the input file after the last data from the file has already been read.\nF. The end-file condition occurs when the file reaches a certain size limit during data writing.\nG. The end-file condition occurs when the file is corrupted\nH. The end-file condition occurs when the file's read permission is revoked while the program is running.\nI. The end-file condition is triggered by a specific keyword written into the file.\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "E",
+      "category": "computer science",
+      "question": "Explain the 'END OF FILE Condition' method of ending a Explain the 'END OF FILE Condition' method of ending a programin PL/I."
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "7536",
+    "prompt": "Question: Economic stabilization policy usually works with time-lags. Which lags in the effects of economic policy may you discern?\n\nOptions:\nA. Decision lag and effect lag\nB. Recognition lag and implementation lag\nC. Implementation lag and evaluation lag\nD. Communication lag and stabilization lag\nE. Action lag and outside lag\nF. Inside time-lag and outside lag\nG. Administrative lag and operational lag\nH. Policy lag and response lag\nI. Recognition lag and decision lag\nJ. Inside lag and decision lag\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "F",
+      "category": "economics",
+      "question": "Economic stabilization policy usually works with time-lags. Which lags in the effects of economic policy may you discern?"
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "11869",
+    "prompt": "Question: Steel, with an initial carbon concentration of 0.30% by weight, is placed in a carburizing atmosphere for 1.5 hr. The surfaceconcentration of carbon,c_A,s, is 0.75%. The diffusivityof carbon in steel is 1.1 × 10^-11 m^2/sec at the existentconditions of pressure and temperature. Obtain the concentrationof carbon at 0.015, 0.025, and 0.045 cm under thesurface of the steel.\n\nOptions:\nA. 0.58% carbon, 0.49% carbon, 0.37% carbon\nB. 0.55% carbon, 0.45% carbon, 0.35% carbon\nC. 0.60% carbon, 0.51% carbon, 0.39% carbon\nD. 0.57% carbon, 0.47% carbon, 0.36% carbon\nE. 0.61% carbon, 0.52% carbon, 0.40% carbon\nF. 0.65% carbon, 0.56% carbon, 0.44% carbon\nG. 0.63% carbon, 0.54% carbon, 0.42% carbon\nH. 0.59% carbon, 0.50% carbon, 0.38% carbon\nI. 0.62% carbon, 0.53% carbon, 0.41% carbon\nJ. 0.64% carbon, 0.55% carbon, 0.43% carbon\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "C",
+      "category": "engineering",
+      "question": "Steel, with an initial carbon concentration of 0.30% by weight, is placed in a carburizing atmosphere for 1.5 hr. The surfaceconcentration of carbon,c_A,s, is 0.75%. The diffusivityof carbon in steel is 1.1 × 10^-11 m^2/sec at the existentconditions of pressure and temperature. Obtain the concentrationof carbon at 0.015, 0.025, and 0.045 cm under thesurface of the steel."
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "6110",
+    "prompt": "Question: Over 1 year, a study is conducted to assess the antileukemic activity of a new tyrosine kinase inhibitor in patients with chronic myeloid leukemia in blast crisis. All patients enrolled in the study are informed that they would be treated with the tyrosine kinase inhibitor. They are assigned to successive dose cohorts of 300 to 1000 mg/day of the drug. Six to eight patients are assigned to each dose. Treatment efficacy is determined based on the results of complete blood counts and bone marrow assessments conducted regularly throughout the study. This study is best described as which of the following?\n\nOptions:\nA. Prospective observational study\nB. Randomized clinical trial\nC. Quasi-experimental study\nD. Retrospective study\nE. Cohort study\nF. Open-labeled clinical trial\nG. Case-control study\nH. Crossover study\nI. Double-blind clinical trial\nJ. Longitudinal study\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "F",
+      "category": "health",
+      "question": "Over 1 year, a study is conducted to assess the antileukemic activity of a new tyrosine kinase inhibitor in patients with chronic myeloid leukemia in blast crisis. All patients enrolled in the study are informed that they would be treated with the tyrosine kinase inhibitor. They are assigned to successive dose cohorts of 300 to 1000 mg/day of the drug. Six to eight patients are assigned to each dose. Treatment efficacy is determined based on the results of complete blood counts and bone marrow assessments conducted regularly throughout the study. This study is best described as which of the following?"
+    },
+    "max_tokens": 8
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "4912",
+    "prompt": "Question: This question refers to the following information.\nOur leaders talk about stopping aggression from the north, but this was a struggle among groups of Vietnamese until we intervened. We seem bent upon saving the Vietnamese from Ho Chi Minh even if we have to kill them and demolish their country to do it. As the native people survey bombed-out villages, women and children burned by napalm, rice crops destroyed and cities overrun with our military personnel, they are doubtless saying secretly of the Vietcong guerillas and of the American forces, \"A plague on both your houses.\" … Stop the bombing, north and south, end search and destroy offensive sweeps, and confine our military action to holding operations on the ground. Bombing the north has failed to halt or seriously check the flow of troops to the south and may, in fact, have prompted a much greater war effort by Hanoi.\n—Senator George McGovern, \"The Lessons of Vietnam,\" April 25, 1967\nThe sentiments expressed in the speech above most directly influenced which of the following?\n\nOptions:\nA. The resignation of Richard Nixon in 1974\nB. The decision of the U.S. to engage in the Korean War\nC. The escalation of the Cold War in the 1970s\nD. The Tet Offensive of 1968\nE. The signing of the Paris Peace Accords in 1973\nF. The formation of the Vietnam Veterans Against the War in 1967\nG. The emergence of a youth counterculture\nH. The passage of the War Powers Act of 1973\nI. The start of the Vietnam War in 1955\nJ. The initiation of the Civil Rights Movement in the 1960s\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "H",
+      "category": "history",
+      "question": "This question refers to the following information.\nOur leaders talk about stopping aggression from the north, but this was a struggle among groups of Vietnamese until we intervened. We seem bent upon saving the Vietnamese from Ho Chi Minh even if we have to kill them and demolish their country to do it. As the native people survey bombed-out villages, women and children burned by napalm, rice crops destroyed and cities overrun with our military personnel, they are doubtless saying secretly of the Vietcong guerillas and of the American forces, \"A plague on both your houses.\" … Stop the bombing, north and south, end search and destroy offensive sweeps, and confine our military action to holding operations on the ground. Bombing the north has failed to halt or seriously check the flow of troops to the south and may, in fact, have prompted a much greater war effort by Hanoi.\n—Senator George McGovern, \"The Lessons of Vietnam,\" April 25, 1967\nThe sentiments expressed in the speech above most directly influenced which of the following?"
+    },
+    "max_tokens": 8
+  }
+]
