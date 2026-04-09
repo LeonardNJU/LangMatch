@@ -1,0 +1,16 @@
+[project]
+name = "wyw-pilot"
+version = "0.1.0"
+description = "Pilot experiments for Classical Chinese prompt compression"
+requires-python = ">=3.10"
+dependencies = [
+  "datasets>=3.5.0",
+  "httpx[socks]>=0.28.1",
+  "matplotlib>=3.9.0",
+  "openai>=1.75.0",
+  "tqdm>=4.67.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
