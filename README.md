@@ -1,12 +1,29 @@
-# WYW: Wenyanwen Prompt Matrix
+# LangMatch: Wenyanwen Prompt Matrix
 
 This repository studies whether **Classical Chinese / Wenyanwen** can serve as a useful prompt language for LLMs under a **quality–cost tradeoff** framing rather than a purely stylistic one.
+
+It currently contains two closely related experiment families:
+
+- the original **matrix** comparison over prompt-language settings (`base / zh_compact / wy`), and
+- the newer **LangMatch 3-run** comparison over interaction settings (`explicit_process / hidden / compact_visible`) while keeping the language settings fixed as `base / zh / wy`.
 
 The current codebase supports a fixed evaluation matrix over:
 
 - **Models**: `gpt-4o`, `gpt-5.4`, `qwen3-1.7b`, `qwen3-4b`
 - **Prompt modes**: `base`, `zh_compact`, `wy`
 - **Benchmarks**: `IFEval`, `MATH-500` (text-only subset), `MMLU-Pro`
+
+For the LangMatch 3-run workflow, the current public release includes:
+
+- **Models**: `gpt-4o`, `gpt-5.4`, `qwen3-4b`
+- **Interaction settings**:
+  - `explicit_process`: explicitly request visible reasoning
+  - `hidden`: request careful thinking but no visible reasoning
+  - `compact_visible`: allow only brief visible reasoning
+- **Language settings**: `base`, `zh`, `wy`
+- **Currently exported benchmarks**: `MATH-500`, `MMLU-Pro`
+
+The current LangMatch 3-run report keeps the `IFEval` panel in the figure layout for comparability, but the exported 3-run artifact set does **not** currently include `IFEval` rows. Treat those panels as explicit missing-data placeholders, not negative results.
 
 The repository has already gone through one important methodological correction:
 
@@ -64,15 +81,27 @@ These are intentionally close in function, but not identical in linguistic form.
   - `run_pilot.py`: main experiment runner
   - `aggregate_matrix_results.py`: aggregates per-run summaries into report tables
   - `generate_matrix_plots.py`: generates benchmark comparison figures
+  - `prepare_langmatch_manifests.py`: builds language-matched manifests for `hidden` and `compact` modes
+  - `run_langmatch_experiment.py`: runs the LangMatch experiment over prepared manifests
+  - `aggregate_langmatch_results.py`: aggregates LangMatch run directories into Markdown tables
+  - `export_langmatch_outputs.py`: exports consolidated LangMatch per-sample outputs
+  - `export_langmatch_3runs.py`: consolidates the 3-run comparison into publish-safe tables and local-only interaction exports
+  - `generate_langmatch_3runs_plots.py`: generates the 12 LangMatch Pareto plots
 - `docs/`
   - proposal and result reports
   - English and Chinese analysis docs
   - generated figures used in reports
+  - LangMatch 3-run Chinese report and publish-safe summary artifacts
 - `data/`
   - fixed manifests for pilot runs and full matrix runs
   - these manifests define the exact benchmark subsets and per-task token caps
+  - `langmatch_v1/`: explicit-process manifests
+  - `langmatch_v2/`: hidden / compact-visible manifests
+  - `langmatch_source_manifest_v1.json`: source benchmark subset used for LangMatch
 - `src/wyw_pilot/`
   - minimal package root; currently light, reserved for future shared utilities
+- `tests/`
+  - regression tests for LangMatch manifest preparation and hidden-think splitting behavior
 - `log/`
   - local run outputs (`results.jsonl`, `summary.json`, `summary.md`, etc.)
   - ignored by git
@@ -91,6 +120,14 @@ The pipeline is deliberately manifest-driven:
    - `aggregate_matrix_results.py` merges multiple run directories into one matrix report
 5. **Visualization**
    - `generate_matrix_plots.py` draws Pareto-style `Score vs Total Tok` figures
+
+The LangMatch flow is similar but explicitly separates **manifest construction**, **run execution**, **export**, and **3-run reporting**:
+
+1. `prepare_langmatch_manifests.py` constructs `langmatch_v1/` or `langmatch_v2/` manifests
+2. `run_langmatch_experiment.py` executes one model over one manifest directory
+3. `aggregate_langmatch_results.py` summarizes a set of model runs
+4. `export_langmatch_3runs.py` consolidates the 3-run comparison
+5. `generate_langmatch_3runs_plots.py` produces the publish-safe Pareto figures used in the report
 
 ---
 
@@ -158,12 +195,20 @@ The corrected `2048` rerun currently supports the following working conclusions:
   - `gpt-4o` prefers `zh_compact`
   - `gpt-5.4` prefers `wy`
 
+For the LangMatch 3-run comparison, the current working conclusion is slightly sharper:
+
+- visible-reasoning format matters in addition to prompt language;
+- `gpt-5.4 / wy` is strongest under `explicit_process` and `compact_visible`;
+- `hidden` is mainly a **cost-reduction** setting rather than a score-maximizing one;
+- `qwen3-4b` does not show a stable Wenyan advantage across the 3-run setup.
+
 That makes Wenyan a **conditional prompt-compression strategy**, not a universal one.
 
 For the latest writeups, see:
 
 - `docs/matrix_eval_results_2048.md`
 - `docs/matrix_eval_results_2048_zh.md`
+- `docs/langmatch_3runs_results_zh.md`
 
 ---
 
@@ -186,7 +231,7 @@ Use environment variables. **Do not hardcode keys in commands, scripts, docs, or
 
 ```bash
 export OPENAI_BASE_URL="https://your-compatible-endpoint/v1"
-export OPENAI_API_KEY="YOUR_KEY_HERE"
+export OPENAI_API_KEY="<set-in-your-shell-environment>"
 
 .venv/bin/python scripts/run_pilot.py \
   --backend openai \
@@ -226,6 +271,61 @@ export OPENAI_API_KEY="YOUR_KEY_HERE"
   --run qwen3-1.7b=log/matrix-2048-qwen3-1.7b \
   --run qwen3-4b=log/matrix-2048-qwen3-4b \
   --output-dir docs/figures/matrix_eval_results_2048
+```
+
+### Prepare LangMatch manifests
+
+```bash
+.venv/bin/python scripts/prepare_langmatch_manifests.py \
+  --source-manifest data/langmatch_source_manifest_v1.json \
+  --mode hidden \
+  --output-dir data/langmatch_v2
+
+.venv/bin/python scripts/prepare_langmatch_manifests.py \
+  --source-manifest data/langmatch_source_manifest_v1.json \
+  --mode compact \
+  --output-dir data/langmatch_v2
+```
+
+### Run one LangMatch experiment
+
+```bash
+.venv/bin/python scripts/run_langmatch_experiment.py \
+  --backend openai \
+  --model gpt-4o \
+  --manifest data/langmatch_v2/langmatch_hidden_manifest.json \
+  --output-dir log/langmatch-hidden-gpt4o-v2
+```
+
+### Aggregate LangMatch runs
+
+```bash
+.venv/bin/python scripts/aggregate_langmatch_results.py \
+  --run gpt-4o=log/langmatch-hidden-gpt4o-v2 \
+  --run gpt-5.4=log/langmatch-hidden-gpt54-v2 \
+  --run qwen3-4b=log/langmatch-hidden-qwen3-4b-v2 \
+  --output docs/langmatch_hidden_summary.md
+```
+
+### Export the 3-run comparison and generate Pareto figures
+
+The public release ships the **aggregated 3-run outputs** (`langmatch_3runs_tok_sr_table.*`, `langmatch_3runs_plot_summary.json`, figures, and report), but it does **not** ship raw interaction dumps. That split is intentional: the raw exports can contain provider-specific traces and large prompt/response payloads.
+
+So there are two distinct cases:
+
+- **Maintainer-side local export**: use `export_langmatch_3runs.py` after you have local LangMatch run directories.
+- **Public-release figure regeneration**: use `generate_langmatch_3runs_plots.py` directly from the shipped `langmatch_3runs_plot_summary.json`.
+
+Maintainer-side local export:
+
+```bash
+.venv/bin/python scripts/export_langmatch_3runs.py
+```
+
+Public-release figure regeneration:
+
+```bash
+.venv/bin/python scripts/generate_langmatch_3runs_plots.py
 ```
 
 ---
@@ -275,13 +375,16 @@ Rules:
 - only use environment-variable placeholders in docs and scripts
 - do not copy-paste live credentials into READMEs, notebooks, or manifests
 - keep runtime logs out of git unless they have been explicitly sanitized
+- keep raw prompt/response dumps and hidden-think traces out of the open-source release unless you have explicitly scrubbed them for publication
 
 The repo now ignores:
 
 - `.env`
 - `.env.*`
 - `.venv/`
+- `.worktrees/`
 - `log/`
+- raw JSONL exports such as per-sample dumps and local interaction logs
 
 If you add any new local secret file, update `.gitignore` first.
 
@@ -294,9 +397,12 @@ For contributors or reviewers, the fastest way to understand the project is:
 1. `README.md`
 2. `docs/开题报告草案.md`
 3. `docs/matrix_eval_results_2048_zh.md` or `docs/matrix_eval_results_2048.md`
-4. `scripts/run_pilot.py`
-5. `scripts/aggregate_matrix_results.py`
-6. `scripts/generate_matrix_plots.py`
+4. `docs/langmatch_3runs_results_zh.md`
+5. `scripts/run_pilot.py`
+6. `scripts/run_langmatch_experiment.py`
+7. `scripts/aggregate_matrix_results.py`
+8. `scripts/generate_matrix_plots.py`
+9. `scripts/generate_langmatch_3runs_plots.py`
 
 ---
 

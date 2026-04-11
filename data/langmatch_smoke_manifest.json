@@ -1,0 +1,47 @@
+[
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/529.json",
+    "condition": "base",
+    "system_prompt": "You are a careful reasoning assistant. Think carefully in English, answer in English, and always place the final answer inside <answer>...</answer>. For multiple-choice tasks, put only the option letter inside the answer tag.",
+    "user_prompt": "Problem / 题目:\nThe sum of 27 consecutive positive integers is $3^7$. What is their median?\n\nThink carefully in English and write the reasoning in English. Put only the final answer inside <answer>...</answer>. Do not use \\boxed.",
+    "source_prompt": "Problem / 题目:\nThe sum of 27 consecutive positive integers is $3^7$. What is their median?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "81",
+      "subject": "Algebra",
+      "level": 4,
+      "unique_id": "test/algebra/529.json"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/529.json",
+    "condition": "zh",
+    "system_prompt": "你是一个严谨的推理助手。请用中文思考、用中文作答，并且始终把最终答案放在<answer>...</answer>中。如果是选择题，answer标签里只能放选项字母。",
+    "user_prompt": "题目：\n27个连续正整数的和是$3^7$。它们的中位数是多少？\n\n请用中文仔细思考，并用中文写出推理过程。只将最终答案放在<answer>...</answer>中。不要使用\\boxed。",
+    "source_prompt": "Problem / 题目:\nThe sum of 27 consecutive positive integers is $3^7$. What is their median?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "81",
+      "subject": "Algebra",
+      "level": 4,
+      "unique_id": "test/algebra/529.json"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/529.json",
+    "condition": "wy",
+    "system_prompt": "汝为谨严推理之助手。思与答皆用文言，终须以<answer>...</answer>标其终答。若为选择题，answer标签中惟书选项字母。",
+    "user_prompt": "題目：\n二十七相連正整數之和為$3^7$。其中央數為何？\n\n請以文言審思，並以文言書其推理。惟最終答案須且僅須置於<answer>...</answer>之內。勿用\\boxed。",
+    "source_prompt": "Problem / 题目:\nThe sum of 27 consecutive positive integers is $3^7$. What is their median?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "81",
+      "subject": "Algebra",
+      "level": 4,
+      "unique_id": "test/algebra/529.json"
+    },
+    "max_tokens": 2048
+  }
+]

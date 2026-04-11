@@ -1,0 +1,95 @@
+[
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "3511",
+    "mode": "hidden",
+    "condition": "base",
+    "system_prompt": "You are a careful reasoning assistant. Think in English, answer in English, and always place the final answer inside <answer>...</answer>. For multiple-choice tasks, put only the option letter inside the answer tag.",
+    "user_prompt": "Question: How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?\n\nOptions:\nA. Lower vascular plants reproduce asexually by fragmentation, while bryophytes do not reproduce asexually.\nB. Lower vascular plants use binary fission for asexual reproduction, while bryophytes use spores.\nC. Bryophytes and some lower vascular plants carry out asexual reproduction through budding, forming gemmae cups or vegetative reproduction.\nD. Bryophytes reproduce asexually through binary fission.\nE. Lower vascular plants reproduce asexually by producing spores.\nF. Both bryophytes and lower vascular plants reproduce asexually exclusively through spores.\nG. Bryophytes reproduce asexually by producing seeds, which is also a common method in lower vascular plants.\nH. Both bryophytes and lower vascular plants reproduce asexually by producing bulbs.\nI. Bryophytes and lower vascular plants do not reproduce asexually.\nJ. Bryophytes use vegetative reproduction, while lower vascular plants reproduce asexually through the production of miniaturized adult plants.\n\nThink carefully in English. You do not need to show your reasoning. Put only the final option letter inside <answer>...</answer>.",
+    "source_prompt": "Question: How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?\n\nOptions:\nA. Lower vascular plants reproduce asexually by fragmentation, while bryophytes do not reproduce asexually.\nB. Lower vascular plants use binary fission for asexual reproduction, while bryophytes use spores.\nC. Bryophytes and some lower vascular plants carry out asexual reproduction through budding, forming gemmae cups or vegetative reproduction.\nD. Bryophytes reproduce asexually through binary fission.\nE. Lower vascular plants reproduce asexually by producing spores.\nF. Both bryophytes and lower vascular plants reproduce asexually exclusively through spores.\nG. Bryophytes reproduce asexually by producing seeds, which is also a common method in lower vascular plants.\nH. Both bryophytes and lower vascular plants reproduce asexually by producing bulbs.\nI. Bryophytes and lower vascular plants do not reproduce asexually.\nJ. Bryophytes use vegetative reproduction, while lower vascular plants reproduce asexually through the production of miniaturized adult plants.\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "C",
+      "category": "biology",
+      "question": "How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "3511",
+    "mode": "hidden",
+    "condition": "zh",
+    "system_prompt": "你是一个严谨的推理助手。请用中文思考、用中文作答，并始终把最终答案放在<answer>...</answer>中。如果是选择题，answer标签里只能放选项字母。",
+    "user_prompt": "问题：苔藓植物如何进行无性生殖？较低等维管植物又如何进行无性生殖？\n\n选项：\nA. 较低等维管植物通过断裂进行无性生殖，而苔藓植物不进行无性生殖。\nB. 较低等维管植物使用二分裂进行无性生殖，而苔藓植物使用孢子。\nC. 苔藓植物和一些较低等维管植物通过出芽进行无性生殖，形成芽杯或进行营养生殖。\nD. 苔藓植物通过二分裂进行无性生殖。\nE. 较低等维管植物通过产生孢子进行无性生殖。\nF. 苔藓植物和较低等维管植物都仅通过孢子进行无性生殖。\nG. 苔藓植物通过产生种子进行无性生殖，这也是较低等维管植物中的一种常见方式。\nH. 苔藓植物和较低等维管植物都通过产生鳞茎进行无性生殖。\nI. 苔藓植物和较低等维管植物都不进行无性生殖。\nJ. 苔藓植物使用营养生殖，而较低等维管植物通过产生微型成体植株进行无性生殖。\n\n请用中文仔细思考，不必展示推理过程。只把最终选项字母写在<answer>...</answer>中。",
+    "source_prompt": "Question: How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?\n\nOptions:\nA. Lower vascular plants reproduce asexually by fragmentation, while bryophytes do not reproduce asexually.\nB. Lower vascular plants use binary fission for asexual reproduction, while bryophytes use spores.\nC. Bryophytes and some lower vascular plants carry out asexual reproduction through budding, forming gemmae cups or vegetative reproduction.\nD. Bryophytes reproduce asexually through binary fission.\nE. Lower vascular plants reproduce asexually by producing spores.\nF. Both bryophytes and lower vascular plants reproduce asexually exclusively through spores.\nG. Bryophytes reproduce asexually by producing seeds, which is also a common method in lower vascular plants.\nH. Both bryophytes and lower vascular plants reproduce asexually by producing bulbs.\nI. Bryophytes and lower vascular plants do not reproduce asexually.\nJ. Bryophytes use vegetative reproduction, while lower vascular plants reproduce asexually through the production of miniaturized adult plants.\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "C",
+      "category": "biology",
+      "question": "How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "mmlu_pro",
+    "example_id": "3511",
+    "mode": "hidden",
+    "condition": "wy",
+    "system_prompt": "汝为谨严推理之助手。思与答皆用文言，终须以<answer>...</answer>标其终答。若为选择题，answer标签中惟书选项字母。",
+    "user_prompt": "問：苔蘚植物之無性生殖何以行之？下等維管植物又何以行之？\n\n選項：\nA. 下等維管植物以斷裂行無性生殖，而苔蘚植物不行無性生殖。\nB. 下等維管植物以二分裂行無性生殖，而苔蘚植物以孢子行之。\nC. 苔蘚植物與若干下等維管植物，皆可由出芽而行無性生殖，形成 gemmae cups 或營養生殖。\nD. 苔蘚植物以二分裂行無性生殖。\nE. 下等維管植物以產生孢子行無性生殖。\nF. 苔蘚植物與下等維管植物，皆唯以孢子行無性生殖。\nG. 苔蘚植物以產生種子行無性生殖，此亦為下等維管植物之常法。\nH. 苔蘚植物與下等維管植物，皆以產生 bulbs 行無性生殖。\nI. 苔蘚植物與下等維管植物皆不行無性生殖。\nJ. 苔蘚植物用營養生殖，而下等維管植物則由產生微型成體植物而行無性生殖。\n\n請以文言審思，不必顯其推理。惟以最終選項字母置於<answer>...</answer>之中。",
+    "source_prompt": "Question: How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?\n\nOptions:\nA. Lower vascular plants reproduce asexually by fragmentation, while bryophytes do not reproduce asexually.\nB. Lower vascular plants use binary fission for asexual reproduction, while bryophytes use spores.\nC. Bryophytes and some lower vascular plants carry out asexual reproduction through budding, forming gemmae cups or vegetative reproduction.\nD. Bryophytes reproduce asexually through binary fission.\nE. Lower vascular plants reproduce asexually by producing spores.\nF. Both bryophytes and lower vascular plants reproduce asexually exclusively through spores.\nG. Bryophytes reproduce asexually by producing seeds, which is also a common method in lower vascular plants.\nH. Both bryophytes and lower vascular plants reproduce asexually by producing bulbs.\nI. Bryophytes and lower vascular plants do not reproduce asexually.\nJ. Bryophytes use vegetative reproduction, while lower vascular plants reproduce asexually through the production of miniaturized adult plants.\n\nRespond with the single correct option letter only.",
+    "metadata": {
+      "answer": "C",
+      "category": "biology",
+      "question": "How does asexual reproduction take place in the bryophytes ?In the lower vascular plants?"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/2592.json",
+    "mode": "hidden",
+    "condition": "base",
+    "system_prompt": "You are a careful reasoning assistant. Think in English, answer in English, and always place the final answer inside <answer>...</answer>. For multiple-choice tasks, put only the option letter inside the answer tag.",
+    "user_prompt": "Problem / 题目:\nWhat is the value of $513^2 - 487^2$?\n\nThink carefully in English. You do not need to show your reasoning. Put only the final answer inside <answer>...</answer>. Do not use \\boxed.",
+    "source_prompt": "Problem / 题目:\nWhat is the value of $513^2 - 487^2$?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "26000",
+      "subject": "Algebra",
+      "level": 1,
+      "unique_id": "test/algebra/2592.json"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/2592.json",
+    "mode": "hidden",
+    "condition": "zh",
+    "system_prompt": "你是一个严谨的推理助手。请用中文思考、用中文作答，并始终把最终答案放在<answer>...</answer>中。如果是选择题，answer标签里只能放选项字母。",
+    "user_prompt": "题目：\n$513^2 - 487^2$ 的值是多少？\n\n请用中文仔细思考，不必展示推理过程。只将最终答案放在<answer>...</answer>中。不要使用\\boxed。",
+    "source_prompt": "Problem / 题目:\nWhat is the value of $513^2 - 487^2$?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "26000",
+      "subject": "Algebra",
+      "level": 1,
+      "unique_id": "test/algebra/2592.json"
+    },
+    "max_tokens": 2048
+  },
+  {
+    "benchmark": "math500",
+    "example_id": "test/algebra/2592.json",
+    "mode": "hidden",
+    "condition": "wy",
+    "system_prompt": "汝为谨严推理之助手。思与答皆用文言，终须以<answer>...</answer>标其终答。若为选择题，answer标签中惟书选项字母。",
+    "user_prompt": "題目：\n$513^2 - 487^2$之值為何？\n\n請以文言審思，不必顯其推理。惟最終答案須且僅須置於<answer>...</answer>之內。勿用\\boxed。",
+    "source_prompt": "Problem / 题目:\nWhat is the value of $513^2 - 487^2$?\n\nSolve the problem. 只输出最终答案，不要解释。Use compact ASCII math when possible: fractions as a/b, sqrt as sqrt(...), tuples as (a,b), lists comma-separated, and do not use \\boxed.",
+    "metadata": {
+      "answer": "26000",
+      "subject": "Algebra",
+      "level": 1,
+      "unique_id": "test/algebra/2592.json"
+    },
+    "max_tokens": 2048
+  }
+]
