@@ -7,9 +7,7 @@ from pathlib import Path
 
 def load_module():
     script_path = (
-        Path(__file__).resolve().parents[1]
-        / "scripts"
-        / "run_langmatch_experiment.py"
+        Path(__file__).resolve().parents[1] / "scripts" / "run_langmatch_experiment.py"
     )
     spec = importlib.util.spec_from_file_location(
         "run_langmatch_experiment", script_path
