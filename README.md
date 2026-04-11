@@ -1,6 +1,7 @@
 # LangMatch: Wenyanwen Prompt Matrix
 
 This repository studies whether **Classical Chinese / Wenyanwen** can serve as a useful prompt language for LLMs under a **quality–cost tradeoff** framing rather than a purely stylistic one.
+宣传友链: https://linux.do/
 
 It currently contains two closely related experiment families:
 
