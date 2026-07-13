@@ -200,9 +200,9 @@ h2 { margin: 0; font-family: "Noto Serif SC", Georgia, serif; font-size: clamp(3
 .prompt p { margin: 0; color: var(--muted); }
 .prompt .sample { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); color: #4a4541; font-family: "Noto Serif SC", Georgia, serif; font-size: 14px; }
 
-.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.charts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 figure { margin: 0; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: #fff; box-shadow: 0 12px 34px rgba(38,28,24,.07); }
-figure.wide { grid-column: 1 / -1; }
+figure.wide { grid-column: auto; }
 figure img { display: block; width: 100%; height: auto; }
 figcaption { display: flex; justify-content: space-between; gap: 18px; padding: 14px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 figcaption strong { color: var(--ink); }
@@ -229,13 +229,13 @@ figcaption strong { color: var(--ink); }
 .doc-link span { color: var(--muted); font-size: 14px; }
 
 html[lang="zh-CN"] body {
-  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", Arial, sans-serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
 }
 html[lang="zh-CN"] h1,
 html[lang="zh-CN"] h2,
 html[lang="zh-CN"] h3,
 html[lang="zh-CN"] .subtitle-mark {
-  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", Arial, sans-serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
 }
 html[lang="zh-CN"] h1 { gap: 17px; }
 html[lang="zh-CN"] .subtitle-mark {
@@ -260,7 +260,7 @@ html[lang="zh-CN"] .body-copy {
   line-height: 1.72;
 }
 html[lang="zh-CN"] .metric-unit {
-  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Noto Sans CJK SC", Arial, sans-serif;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
   font-style: normal;
   letter-spacing: 0;
 }
