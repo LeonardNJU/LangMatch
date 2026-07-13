@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LangMatch — Prompt Language as a Quality–Cost Variable</title>
+  <meta name="description" content="LangMatch tests whether Classical Chinese can act as a conditional natural-language prompt compression strategy for LLMs.">
+  <meta property="og:title" content="LangMatch">
+  <meta property="og:description" content="Does prompt language change the quality–cost frontier of LLM inference?">
+  <meta property="og:image" content="assets/hero.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#">LangMatch</a>
+      <div class="navlinks">
+        <a href="#findings">Findings</a>
+        <a href="#results">Results</a>
+        <a href="#method">Method</a>
+        <a class="lang" href="zh.html">中文</a>
+        <a class="button primary" href="https://github.com/LeonardNJU/LangMatch">GitHub</a>
+      </div>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Cross-lingual LLM evaluation</p>
+      <h1><span class="title-main">LangMatch</span><span class="subtitle-mark">Can language itself compress a prompt?</span></h1>
+      <p class="lead">A controlled study of whether English, compact Modern Chinese, and Classical Chinese move an LLM to a different quality–cost frontier — with tasks and model backends held fixed.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/LeonardNJU/LangMatch">View repository</a>
+        <a class="button secondary" href="#results">See results</a>
+        <a class="button secondary" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/matrix_eval_results_2048.md">Read report</a>
+      </div>
+    </div>
+    <div class="hero-figure" aria-label="LangMatch project illustration">
+      <img src="assets/hero.png" alt="LangMatch project illustration comparing English, Simplified Chinese, and WenYan prompts">
+      <div class="hero-callout">Wényán is not universally cheaper or better — but on strong models it can become a genuine Pareto contender.</div>
+    </div>
+  </header>
+
+  <section class="metric-strip" aria-label="Study summary">
+    <div class="metrics">
+      <div class="metric"><strong><span class="metric-value">4</span><span class="metric-unit">models</span></strong><span>closed and open-weight model families</span></div>
+      <div class="metric"><strong><span class="metric-value">3</span><span class="metric-unit">languages</span></strong><span>English, Simplified Chinese, WenYan</span></div>
+      <div class="metric"><strong><span class="metric-value">3</span><span class="metric-unit">benchmarks</span></strong><span>IFEval, MATH-500, and MMLU-Pro</span></div>
+      <div class="metric"><strong><span class="metric-value">2048</span><span class="metric-unit">token budget</span></strong><span>corrected output budget with truncation auditing</span></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="findings">
+      <div class="section-head">
+        <h2>What the study finds</h2>
+        <p>The result is not “one language wins.” Prompt language interacts with model capacity, task type, and reasoning visibility.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="tag indigo">Robust default</span>
+          <h3>Compact Modern Chinese travels best.</h3>
+          <p><code>zh_compact</code> is the most stable choice across model families, often preserving quality while controlling completion length.</p>
+        </article>
+        <article class="card">
+          <span class="tag red">Conditional gain</span>
+          <h3>Wényán helps selectively.</h3>
+          <p>Classical Chinese is strongest overall for GPT-5.4 in the corrected matrix, but its advantage does not transfer reliably to smaller open models.</p>
+        </article>
+        <article class="card">
+          <span class="tag jade">Reasoning format</span>
+          <h3>Visibility changes the frontier.</h3>
+          <p>Hidden reasoning mainly cuts visible-token cost; compact-visible reasoning preserves the strongest GPT-5.4/Wényán point at much lower cost than explicit process.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="question">
+      <div class="section-head">
+        <h2>One task, three prompt languages</h2>
+        <p>Only the system-prompt language changes. The task subset, model backend, evaluator, and output budget stay fixed.</p>
+      </div>
+      <div class="prompt-grid">
+        <article class="prompt">
+          <code>base</code>
+          <h3>Compact English</h3>
+          <p>The conventional control: clear, terse, and familiar to every model family in the study.</p>
+          <p class="sample">“Follow the user’s instructions carefully… eliminate redundancy and aim for compact, clear expression.”</p>
+        </article>
+        <article class="prompt">
+          <code>zh_compact</code>
+          <h3>Simplified Chinese</h3>
+          <p>A compact Chinese control that separates language effects from the special literary style of Wényán.</p>
+          <p class="sample">“请严格遵循用户要求……删繁就简，要求表达精炼、意思清楚。”</p>
+        </article>
+        <article class="prompt">
+          <code>wy</code>
+          <h3>Classical Chinese</h3>
+          <p>An information-dense natural language whose ellipsis and terse grammar make it a plausible prompt-compression regime.</p>
+          <p class="sample">“凡码与引文外，释理叙事宜从简。禁绝白话冗词，务求辞约义明。”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="section-head">
+        <h2>Corrected main matrix</h2>
+        <p>The 2048-token rerun removes the largest truncation artifact from the pilot and reports score together with total inference tokens.</p>
+      </div>
+      <div class="charts">
+        <figure class="wide">
+          <img src="assets/matrix-math500.png" alt="MATH-500 prompt-language comparison">
+          <figcaption><strong>MATH-500.</strong><span>GPT-4o favors compact Chinese; GPT-5.4 favors Wényán.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/matrix-ifeval.png" alt="IFEval prompt-language comparison">
+          <figcaption><strong>IFEval.</strong><span>High-capacity models satisfy the benchmark under multiple languages.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/matrix-mmlu-pro.png" alt="MMLU-Pro prompt-language comparison">
+          <figcaption><strong>MMLU-Pro.</strong><span>The most conservative slice; language effects remain model-dependent.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Reasoning visibility matters too</h2>
+        <p>A second three-run study varies whether reasoning is explicit, hidden, or compact-visible while keeping the language conditions fixed.</p>
+      </div>
+      <div class="charts">
+        <figure>
+          <img src="assets/three-run-explicit.png" alt="Explicit reasoning overall results">
+          <figcaption><strong>Explicit process.</strong><span>GPT-5.4/Wényán reaches 0.833 SR.</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/three-run-hidden.png" alt="Hidden reasoning overall results">
+          <figcaption><strong>Hidden.</strong><span>Much cheaper for closed models, but language gaps flatten.</span></figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="assets/three-run-compact.png" alt="Compact-visible reasoning overall results">
+          <figcaption><strong>Compact visible.</strong><span>The same 0.833 GPT-5.4/Wényán score at 381.92 tokens instead of 578.42.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="method-band" id="method">
+      <div class="method-grid">
+        <div>
+          <h2>Manifest-driven and auditable</h2>
+          <p class="body-copy">Every run records the exact task subset, prompt condition, configured token budget, finish reason, token usage, and evaluator result. The pipeline keeps raw execution, aggregation, and plotting separate.</p>
+        </div>
+        <pre class="pipeline"><code>fixed manifest
+  → task × language × model runs
+  → results.jsonl + usage metadata
+  → truncation audit
+  → cross-run aggregation
+  → score / token Pareto plots</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="notice">
+        <strong>Interpretation boundary.</strong> LangMatch is an exploratory study, not evidence that Classical Chinese is universally superior. Token counts are source-native and should be compared within a model/backend; GPT-5.4’s Wényán gain is real in this release, but strongly conditional.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Reports and reproducibility</h2>
+        <p>The public repository includes manifests, runners, aggregated reports, plotting scripts, and publish-safe result artifacts.</p>
+      </div>
+      <div class="docs">
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch"><strong>Repository</strong><span>Code, manifests, tests, and project overview.</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/matrix_eval_results_2048.md"><strong>Main matrix</strong><span>Corrected 2048-token report and complete tables.</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/langmatch_3runs_results_zh.md"><strong>Three-run study</strong><span>Reasoning-visibility comparison and caveats.</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/tree/main/data"><strong>Manifests</strong><span>Frozen task subsets and experiment definitions.</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>LangMatch is an exploratory open research project by Leonard Li. Results shown here correspond to the corrected public 2048-token release.</footer>
+</body>
+</html>

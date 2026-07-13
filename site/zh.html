@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LangMatch —— 提示语言也是质量–成本变量</title>
+  <meta name="description" content="LangMatch 探究文言文能否成为一种有条件成立的自然语言提示压缩策略。">
+  <meta property="og:title" content="LangMatch">
+  <meta property="og:description" content="提示语言会不会改变大模型推理的质量–成本前沿？">
+  <meta property="og:image" content="assets/hero.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#">LangMatch</a>
+      <div class="navlinks">
+        <a href="#findings">发现</a>
+        <a href="#results">结果</a>
+        <a href="#method">方法</a>
+        <a class="lang" href="index.html">English</a>
+        <a class="button primary" href="https://github.com/LeonardNJU/LangMatch">GitHub</a>
+      </div>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">跨语言大模型评测</p>
+      <h1><span class="title-main">LangMatch</span><span class="subtitle-mark">语言本身，能不能压缩 Prompt？</span></h1>
+      <p class="lead">一项受控实证研究：固定任务、模型后端和输出预算，只把系统提示分别写成英文、精简现代中文与文言文，观察质量–成本前沿如何移动。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/LeonardNJU/LangMatch">查看仓库</a>
+        <a class="button secondary" href="#results">查看结果</a>
+        <a class="button secondary" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/matrix_eval_results_2048_zh.md">阅读报告</a>
+      </div>
+    </div>
+    <div class="hero-figure" aria-label="LangMatch 项目主视觉">
+      <img src="assets/hero.png" alt="LangMatch 项目主视觉，对比英文、简体中文与文言文提示">
+      <div class="hero-callout">文言文并非处处更省、处处更强；但在足够强的模型上，它确实可能成为真正的 Pareto 候选。</div>
+    </div>
+  </header>
+
+  <section class="metric-strip" aria-label="实验概览">
+    <div class="metrics">
+      <div class="metric"><strong><span class="metric-value">4</span><span class="metric-unit">个模型</span></strong><span>覆盖闭源与开源模型家族</span></div>
+      <div class="metric"><strong><span class="metric-value">3</span><span class="metric-unit">种语言</span></strong><span>英文、简体中文、文言文</span></div>
+      <div class="metric"><strong><span class="metric-value">3</span><span class="metric-unit">个基准</span></strong><span>IFEval、MATH-500、MMLU-Pro</span></div>
+      <div class="metric"><strong><span class="metric-value">2048</span><span class="metric-unit">token 预算</span></strong><span>修正后统一预算，并显式审计截断</span></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="findings">
+      <div class="section-head">
+        <h2>实验真正发现了什么</h2>
+        <p>结论不是“某种语言全面获胜”。提示语言会与模型能力、任务类型和推理可见形式发生明显交互。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="tag indigo">稳健默认项</span>
+          <h3>精简现代中文迁移性最好。</h3>
+          <p><code>zh_compact</code> 在不同模型家族间最稳定，常能保持任务质量，同时控制输出长度。</p>
+        </article>
+        <article class="card">
+          <span class="tag red">条件性收益</span>
+          <h3>文言文只在特定条件下获益。</h3>
+          <p>修正后的主矩阵中，文言文是 GPT-5.4 的总体最优条件；但这一优势没有稳定迁移到较小的开源模型。</p>
+        </article>
+        <article class="card">
+          <span class="tag jade">推理形式</span>
+          <h3>是否展示推理也会改变前沿。</h3>
+          <p>隐藏推理主要压低可见 token；紧凑可见推理则以比显式过程更低的成本，保留了最强的 GPT-5.4 / 文言组合。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="question">
+      <div class="section-head">
+        <h2>同一任务，三种提示语言</h2>
+        <p>只改 system prompt 的语言；任务子集、模型后端、评分器与输出预算全部固定。</p>
+      </div>
+      <div class="prompt-grid">
+        <article class="prompt">
+          <code>base</code>
+          <h3>精简英文</h3>
+          <p>传统控制组：清楚、简洁，也是所有受测模型最熟悉的提示语言。</p>
+          <p class="sample">“Follow the user’s instructions carefully… eliminate redundancy and aim for compact, clear expression.”</p>
+        </article>
+        <article class="prompt">
+          <code>zh_compact</code>
+          <h3>简体中文</h3>
+          <p>精简中文控制组，用来把一般语言效应与文言文特殊文体效应区分开。</p>
+          <p class="sample">“请严格遵循用户要求……删繁就简，要求表达精炼、意思清楚。”</p>
+        </article>
+        <article class="prompt">
+          <code>wy</code>
+          <h3>文言文</h3>
+          <p>高信息密度、强省略、语法凝练，因此可能成为一种天然的自然语言 prompt compression 形式。</p>
+          <p class="sample">“凡码与引文外，释理叙事宜从简。禁绝白话冗词，务求辞约义明。”</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="section-head">
+        <h2>修正后的主矩阵</h2>
+        <p>2048-token 重跑消除了 pilot 中最大的截断伪影，并把任务分数与总推理 token 放在同一张图上报告。</p>
+      </div>
+      <div class="charts">
+        <figure class="wide">
+          <img src="assets/matrix-math500.png" alt="MATH-500 提示语言比较">
+          <figcaption><strong>MATH-500。</strong><span>GPT-4o 偏好精简中文；GPT-5.4 偏好文言文。</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/matrix-ifeval.png" alt="IFEval 提示语言比较">
+          <figcaption><strong>IFEval。</strong><span>高能力模型能在多种提示语言下完成全部约束。</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/matrix-mmlu-pro.png" alt="MMLU-Pro 提示语言比较">
+          <figcaption><strong>MMLU-Pro。</strong><span>最保守的一组结果，语言效应依然强烈依赖模型。</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>推理可见性同样重要</h2>
+        <p>第二轮三组实验固定语言条件，改为比较显式过程、隐藏推理与紧凑可见推理。</p>
+      </div>
+      <div class="charts">
+        <figure>
+          <img src="assets/three-run-explicit.png" alt="显式过程总体结果">
+          <figcaption><strong>显式过程。</strong><span>GPT-5.4 / 文言达到 0.833 SR。</span></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/three-run-hidden.png" alt="隐藏推理总体结果">
+          <figcaption><strong>隐藏推理。</strong><span>闭源模型显著省 token，但语言差异被压平。</span></figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="assets/three-run-compact.png" alt="紧凑可见推理总体结果">
+          <figcaption><strong>紧凑可见。</strong><span>同样达到 0.833，但从 578.42 token 降至 381.92。</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="method-band" id="method">
+      <div class="method-grid">
+        <div>
+          <h2>基于 Manifest，完整可审计</h2>
+          <p class="body-copy">每次运行都记录确切任务子集、提示条件、token 上限、finish reason、用量和评分结果。执行、聚合与画图彼此分离，截断不会再被静默当成模型失败。</p>
+        </div>
+        <pre class="pipeline"><code>固定 manifest
+  → 任务 × 语言 × 模型运行
+  → results.jsonl + 用量元数据
+  → 截断审计
+  → 跨运行聚合
+  → 分数 / token Pareto 图</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="notice">
+        <strong>解释边界。</strong>LangMatch 是研究性探索，并不能证明文言文普遍优于其他提示语言。不同后端的 token 统计应主要在同一模型内部比较；GPT-5.4 上的文言收益在当前结果中成立，但它是高度条件化的。
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>报告与复现材料</h2>
+        <p>公开仓库包含实验 manifest、runner、聚合报告、绘图脚本和可公开结果产物。</p>
+      </div>
+      <div class="docs">
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch"><strong>项目仓库</strong><span>代码、manifest、测试与项目概览。</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/matrix_eval_results_2048_zh.md"><strong>主矩阵报告</strong><span>修正后的 2048-token 完整表格与分析。</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/blob/main/docs/langmatch_3runs_results_zh.md"><strong>三组对照</strong><span>推理可见性结果、局限与解释。</span></a>
+        <a class="doc-link" href="https://github.com/LeonardNJU/LangMatch/tree/main/data"><strong>实验清单</strong><span>冻结任务子集与精确实验定义。</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>LangMatch 是 Leonard Li 发起的开放研究性项目；本页结果对应修正后的公开 2048-token 版本。</footer>
+</body>
+</html>
