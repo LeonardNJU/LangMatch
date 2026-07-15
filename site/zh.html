@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="LangMatch 研究英文、简体中文与文言文如何改变大模型推理的质量–成本前沿。">
   <meta name="twitter:image" content="https://langmatch.lsamc.website/og-image.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"LangMatch","headline":"LangMatch —— 提示语言也是质量–成本变量","description":"LangMatch 研究英文、简体中文与文言文如何改变大模型推理的质量–成本前沿。","url":"https://langmatch.lsamc.website/zh.html","image":"https://langmatch.lsamc.website/og-image.png","inLanguage":"zh-CN","author":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"publisher":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"codeRepository":"https://github.com/LeonardNJU/LangMatch","programmingLanguage":"Python"}</script>
-  <link rel="stylesheet" href="styles.css?v=20260715-5">
+  <link rel="stylesheet" href="styles.css?v=20260715-6">
 </head>
 <body>
   <div class="topbar">
@@ -135,21 +135,30 @@
 <section class="section tone-light" id="example">
       <div class="section-head">
         <h2>一条评测样本长什么样？</h2>
-        <p>同一道 MMLU-Pro 题目保持语义与正确答案不变，只改变系统提示和题面语言。下面取自公开 manifest 的 example 800；回答为输出格式示意，不计入新增实验结果。</p>
+        <p>这里改用公开 compact manifest 中的 MATH-500 number-theory/149。题意与答案完全相同，但简体中文题面为 188 个非空白字符，文言文仅 150 个，缩短约 20%。</p>
       </div>
-      <div class="shared-task"><span>共同任务</span><p>一件连衣裙售价 $50，加价率按售价计算为 40%。加价金额是多少？正确选项为 G：$20。</p></div>
+      <div class="shared-task"><span>共同任务与计数口径</span><p>求所有满足 N < 50、N 除以 8 余 5、N 除以 6 余 3 的整数 N 之和。正确答案为 66。字符数直接取自公开 manifest，并排除空白；下面的回答仅用于展示输出形式，不作为新增实测数据。</p></div>
       <div class="showcase-grid"><article class="showcase-card showcase-base">
-          <div class="showcase-language">English</div>
-          <div class="showcase-block"><span>System prompt</span><p>Think and answer in English. Stay compact and put only the option letter inside &lt;answer&gt;…&lt;/answer&gt;.</p></div>
-          <div class="showcase-block response"><span>Representative output</span><p>The markup is 40% of the selling price: 0.40 × $50 = $20. &lt;answer&gt;G&lt;/answer&gt;</p></div>
+          <div class="showcase-language"><span>English</span><span class="showcase-count">400 非空白字符</span></div>
+          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>Problem / 题目:
+A group of $N$ students, where $N &lt; 50$, is on a field trip. If their teacher puts them in groups of 8, the last group has 5 students. If their teacher instead puts them in groups of 6, the last group has 3 students. What is the sum of all possible values of $N$?
+
+Think carefully in English. You may include a brief reasoning sketch if helpful, but keep it compact and no longer than one short paragraph. Put only the final answer inside &lt;answer&gt;...&lt;/answer&gt;. Do not use \boxed.</p></div>
+          <div class="showcase-block response"><span>输出示意 · 91 chars</span><p>We need N ≡ 5 (mod 8) and N ≡ 3 (mod 6). Below 50, the solutions are 21 and 45, whose sum is 66. &lt;answer&gt;66&lt;/answer&gt;</p></div>
         </article><article class="showcase-card showcase-zh">
-          <div class="showcase-language">简体中文</div>
-          <div class="showcase-block"><span>系统提示</span><p>用中文思考与作答，保持简洁，并把最终选项字母放入 &lt;answer&gt;…&lt;/answer&gt;。</p></div>
-          <div class="showcase-block response"><span>输出示意</span><p>加价为售价的 40%：0.40 × $50 = $20。&lt;answer&gt;G&lt;/answer&gt;</p></div>
+          <div class="showcase-language"><span>简体中文</span><span class="showcase-count">188 非空白字符</span></div>
+          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>题目：
+一组学生共有 $N$ 人，其中 $N &lt; 50$，正在进行一次实地考察。如果老师把他们分成每组 8 人，那么最后一组有 5 名学生。如果老师改为把他们分成每组 6 人，那么最后一组有 3 名学生。$N$ 的所有可能取值之和是多少？
+
+请用中文仔细思考。如有必要，可以写一小段简短推理，但整体必须简洁，且不要超过一个短段。只将最终答案放在&lt;answer&gt;...&lt;/answer&gt;中。不要使用\boxed。</p></div>
+          <div class="showcase-block response"><span>输出示意 · 76 chars</span><p>条件等价于 N ≡ 5 (mod 8) 且 N ≡ 3 (mod 6)。在 N &lt; 50 时，符合条件的 N 为 21 和 45，故所有可能值之和为 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
         </article><article class="showcase-card showcase-wy">
-          <div class="showcase-language">文言文</div>
-          <div class="showcase-block"><span>系统提示</span><p>思与答皆用文言，辞务简劲，终以 &lt;answer&gt;…&lt;/answer&gt; 标其选项。</p></div>
-          <div class="showcase-block response"><span>输出示意</span><p>加價為售價四成，故 $50 × 0.4 = $20。&lt;answer&gt;G&lt;/answer&gt;</p></div>
+          <div class="showcase-language"><span>文言文</span><span class="showcase-count">150 非空白字符</span></div>
+          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>題目：
+有學生 $N$ 人，且 $N &lt; 50$，出遊於野。若其師以每組 8 人分之，則末組有 5 人。若其師改以每組 6 人分之，則末組有 3 人。問 $N$ 之一切可能值之和為何？
+
+請以文言審思。若有必要，得略陳其理，然務須簡勁，且毋過一短段。惟最終答案須且僅須置於&lt;answer&gt;...&lt;/answer&gt;之內。勿用\boxed。</p></div>
+          <div class="showcase-block response"><span>输出示意 · 60 chars</span><p>由 N ≡ 5 (mod 8)、N ≡ 3 (mod 6)，且 N &lt; 50，得 N = 21、45，和為 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
         </article></div>
     </section>
 
@@ -251,13 +260,13 @@
       </div>
     </section>
 
-    <section class="section tone-dark">
+    <section class="section tone-light">
       <div class="notice">
         <strong>解释边界。</strong>LangMatch 是研究性探索，并不能证明文言文普遍优于其他提示语言。不同后端的 token 统计应主要在同一模型内部比较；GPT-5.4 上的文言收益在当前结果中成立，但它是高度条件化的。
       </div>
     </section>
 
-    <section class="section tone-light">
+    <section class="section tone-dark">
       <div class="section-head">
         <h2>报告与复现材料</h2>
         <p>公开仓库包含实验 manifest、runner、聚合报告、绘图脚本和可公开结果产物。</p>
