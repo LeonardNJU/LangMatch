@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="LangMatch studies how English, Simplified Chinese, and Classical Chinese change the quality–cost frontier of LLM inference.">
   <meta name="twitter:image" content="https://langmatch.lsamc.website/og-image.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"LangMatch","headline":"LangMatch — Prompt Language as a Quality–Cost Variable","description":"LangMatch studies how English, Simplified Chinese, and Classical Chinese change the quality–cost frontier of LLM inference.","url":"https://langmatch.lsamc.website/","image":"https://langmatch.lsamc.website/og-image.png","inLanguage":"en","author":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"publisher":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"codeRepository":"https://github.com/LeonardNJU/LangMatch","programmingLanguage":"Python"}</script>
-  <link rel="stylesheet" href="styles.css?v=20260714-2">
+  <link rel="stylesheet" href="styles.css?v=20260715-5">
 </head>
 <body>
   <div class="topbar">
@@ -45,6 +45,8 @@
       <div class="navlinks">
         <a href="#findings">Findings</a>
         <a href="#results">Results</a>
+        <a href="#example">Example</a>
+        <a href="#data">Data</a>
         <a href="#method">Method</a>
         <a class="lang" href="zh.html">中文</a>
         <a class="button primary" href="https://github.com/LeonardNJU/LangMatch">GitHub</a>
@@ -79,7 +81,7 @@
   </section>
 
   <main>
-    <section class="section" id="findings">
+    <section class="section tone-light" id="findings">
       <div class="section-head">
         <h2>What the study finds</h2>
         <p>The result is not “one language wins.” Prompt language interacts with model capacity, task type, and reasoning visibility.</p>
@@ -103,7 +105,7 @@
       </div>
     </section>
 
-    <section class="section" id="question">
+    <section class="section tone-dark" id="question">
       <div class="section-head">
         <h2>One task, three prompt languages</h2>
         <p>Only the system-prompt language changes. The task subset, model backend, evaluator, and output budget stay fixed.</p>
@@ -130,7 +132,28 @@
       </div>
     </section>
 
-    <section class="section" id="results">
+<section class="section tone-light" id="example">
+      <div class="section-head">
+        <h2>What does one evaluation item look like?</h2>
+        <p>The underlying MMLU-Pro problem and gold answer stay fixed; only the system prompt and task language change. This is public-manifest example 800. Responses below illustrate the required output form and are not additional leaderboard observations.</p>
+      </div>
+      <div class="shared-task"><span>Shared task</span><p>A dress sells for $50. Its markup is 40% of the selling price. What is the markup in dollars? The gold option is G: $20.</p></div>
+      <div class="showcase-grid"><article class="showcase-card showcase-base">
+          <div class="showcase-language">English</div>
+          <div class="showcase-block"><span>System prompt</span><p>Think and answer in English. Stay compact and put only the option letter inside &lt;answer&gt;…&lt;/answer&gt;.</p></div>
+          <div class="showcase-block response"><span>Illustrative response</span><p>The markup is 40% of the selling price: 0.40 × $50 = $20. &lt;answer&gt;G&lt;/answer&gt;</p></div>
+        </article><article class="showcase-card showcase-zh">
+          <div class="showcase-language">Simplified Chinese</div>
+          <div class="showcase-block"><span>系统提示</span><p>用中文思考与作答，保持简洁，并把最终选项字母放入 &lt;answer&gt;…&lt;/answer&gt;。</p></div>
+          <div class="showcase-block response"><span>示例输出</span><p>加价为售价的 40%：0.40 × $50 = $20。&lt;answer&gt;G&lt;/answer&gt;</p></div>
+        </article><article class="showcase-card showcase-wy">
+          <div class="showcase-language">Wényán</div>
+          <div class="showcase-block"><span>系統提示</span><p>思與答皆用文言，辭務簡勁，終以 &lt;answer&gt;…&lt;/answer&gt; 標其選項。</p></div>
+          <div class="showcase-block response"><span>示例輸出</span><p>加價為售價四成，故 $50 × 0.4 = $20。&lt;answer&gt;G&lt;/answer&gt;</p></div>
+        </article></div>
+    </section>
+
+    <section class="section tone-dark" id="results">
       <div class="section-head">
         <h2>Corrected main matrix</h2>
         <p>The 2048-token rerun removes the largest truncation artifact from the pilot and reports score together with total inference tokens.</p>
@@ -151,7 +174,48 @@
       </div>
     </section>
 
-    <section class="section">
+<section class="section tone-light" id="data">
+      <div class="section-head">
+        <h2>Detailed results</h2>
+        <p>Switch between the aggregate view and each benchmark to inspect score, token cost, and cost-normalized efficiency for every model–language pair.</p>
+      </div>
+      <div class="data-tabs">
+        <input type="radio" name="data-tab" id="data-tab-0" checked><input type="radio" name="data-tab" id="data-tab-1"><input type="radio" name="data-tab" id="data-tab-2"><input type="radio" name="data-tab" id="data-tab-3">
+        <div class="data-tab-controls" role="tablist" aria-label="Detailed result tables"><label for="data-tab-0">Overall</label><label for="data-tab-1">IFEval</label><label for="data-tab-2">MATH-500</label><label for="data-tab-3">MMLU-Pro</label></div>
+        <div class="data-panel panel-0">
+      <div class="table-scroll">
+        <table class="leaderboard-table">
+          <thead><tr><th>Rank</th><th>Model</th><th>Prompt language</th><th>N</th><th>Score</th><th>Prompt tok</th><th>Output tok</th><th>Total tok</th><th>Score / 1k tok</th></tr></thead>
+          <tbody><tr class="leaderboard-best"><td class="rank">1</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>59</td><td class="score"><strong>0.763</strong><span class="best-badge">BEST</span></td><td>186.93</td><td>45.15</td><td>232.08</td><td>3.286</td></tr><tr class=""><td class="rank">2</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>59</td><td class="score"><strong>0.746</strong></td><td>199.93</td><td>49.05</td><td>248.98</td><td>2.995</td></tr><tr class=""><td class="rank">3</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-base">English</span></td><td>59</td><td class="score"><strong>0.729</strong></td><td>181.93</td><td>54.64</td><td>236.58</td><td>3.081</td></tr><tr class=""><td class="rank">4</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>59</td><td class="score"><strong>0.627</strong></td><td>200.93</td><td>29.59</td><td>230.53</td><td>2.720</td></tr><tr class=""><td class="rank">5</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-base">English</span></td><td>59</td><td class="score"><strong>0.593</strong></td><td>182.93</td><td>37.12</td><td>220.05</td><td>2.696</td></tr><tr class=""><td class="rank">6</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>59</td><td class="score"><strong>0.576</strong></td><td>187.93</td><td>32.86</td><td>220.80</td><td>2.610</td></tr><tr class=""><td class="rank">7</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>59</td><td class="score"><strong>0.475</strong></td><td>203.85</td><td>69.98</td><td>273.83</td><td>1.733</td></tr><tr class=""><td class="rank">8</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>59</td><td class="score"><strong>0.475</strong></td><td>197.85</td><td>98.71</td><td>296.56</td><td>1.600</td></tr><tr class=""><td class="rank">9</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-base">English</span></td><td>59</td><td class="score"><strong>0.441</strong></td><td>197.85</td><td>121.95</td><td>319.80</td><td>1.378</td></tr><tr class=""><td class="rank">10</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-base">English</span></td><td>59</td><td class="score"><strong>0.339</strong></td><td>197.85</td><td>127.00</td><td>324.85</td><td>1.044</td></tr><tr class=""><td class="rank">11</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>59</td><td class="score"><strong>0.271</strong></td><td>203.85</td><td>125.20</td><td>329.05</td><td>0.824</td></tr><tr class=""><td class="rank">12</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>59</td><td class="score"><strong>0.254</strong></td><td>197.85</td><td>228.12</td><td>425.97</td><td>0.597</td></tr></tbody>
+        </table>
+      </div>
+    </div><div class="data-panel panel-1">
+      <div class="table-scroll">
+        <table class="leaderboard-table">
+          <thead><tr><th>Rank</th><th>Model</th><th>Prompt language</th><th>N</th><th>Score</th><th>Prompt tok</th><th>Output tok</th><th>Total tok</th><th>Score / 1k tok</th></tr></thead>
+          <tbody><tr class="leaderboard-best"><td class="rank">1</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>107.00</td><td>129.64</td><td>236.64</td><td>4.226</td></tr><tr class="leaderboard-best"><td class="rank">2</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>101.00</td><td>151.73</td><td>252.73</td><td>3.957</td></tr><tr class="leaderboard-best"><td class="rank">3</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-base">English</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>101.00</td><td>177.82</td><td>278.82</td><td>3.587</td></tr><tr class="leaderboard-best"><td class="rank">4</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>96.45</td><td>218.18</td><td>314.64</td><td>3.178</td></tr><tr class="leaderboard-best"><td class="rank">5</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>109.45</td><td>239.09</td><td>348.55</td><td>2.869</td></tr><tr class="leaderboard-best"><td class="rank">6</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-base">English</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>91.45</td><td>269.36</td><td>360.82</td><td>2.771</td></tr><tr class="leaderboard-best"><td class="rank">7</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>11</td><td class="score"><strong>1.000</strong><span class="best-badge">BEST</span></td><td>101.00</td><td>391.45</td><td>492.45</td><td>2.031</td></tr><tr class=""><td class="rank">8</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>11</td><td class="score"><strong>0.909</strong></td><td>110.45</td><td>141.82</td><td>252.27</td><td>3.604</td></tr><tr class=""><td class="rank">9</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-base">English</span></td><td>11</td><td class="score"><strong>0.909</strong></td><td>92.45</td><td>182.36</td><td>274.82</td><td>3.308</td></tr><tr class=""><td class="rank">10</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-base">English</span></td><td>11</td><td class="score"><strong>0.909</strong></td><td>101.00</td><td>314.55</td><td>415.55</td><td>2.188</td></tr><tr class=""><td class="rank">11</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>11</td><td class="score"><strong>0.909</strong></td><td>107.00</td><td>319.91</td><td>426.91</td><td>2.129</td></tr><tr class=""><td class="rank">12</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>11</td><td class="score"><strong>0.818</strong></td><td>97.45</td><td>161.45</td><td>258.91</td><td>3.160</td></tr></tbody>
+        </table>
+      </div>
+    </div><div class="data-panel panel-2">
+      <div class="table-scroll">
+        <table class="leaderboard-table">
+          <thead><tr><th>Rank</th><th>Model</th><th>Prompt language</th><th>N</th><th>Score</th><th>Prompt tok</th><th>Output tok</th><th>Total tok</th><th>Score / 1k tok</th></tr></thead>
+          <tbody><tr class="leaderboard-best"><td class="rank">1</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.708</strong><span class="best-badge">BEST</span></td><td>150.79</td><td>6.00</td><td>156.79</td><td>4.518</td></tr><tr class="leaderboard-best"><td class="rank">2</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.708</strong><span class="best-badge">BEST</span></td><td>164.79</td><td>5.46</td><td>170.25</td><td>4.161</td></tr><tr class=""><td class="rank">3</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.667</strong></td><td>163.79</td><td>6.00</td><td>169.79</td><td>3.926</td></tr><tr class=""><td class="rank">4</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.625</strong></td><td>145.79</td><td>5.88</td><td>151.67</td><td>4.121</td></tr><tr class=""><td class="rank">5</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.583</strong></td><td>151.79</td><td>4.71</td><td>156.50</td><td>3.727</td></tr><tr class=""><td class="rank">6</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.542</strong></td><td>146.79</td><td>5.29</td><td>152.08</td><td>3.562</td></tr><tr class=""><td class="rank">7</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.292</strong></td><td>158.21</td><td>165.50</td><td>323.71</td><td>0.901</td></tr><tr class=""><td class="rank">8</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.250</strong></td><td>164.21</td><td>108.46</td><td>272.67</td><td>0.917</td></tr><tr class=""><td class="rank">9</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.250</strong></td><td>158.21</td><td>155.62</td><td>313.83</td><td>0.797</td></tr><tr class=""><td class="rank">10</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.208</strong></td><td>158.21</td><td>78.12</td><td>236.33</td><td>0.882</td></tr><tr class=""><td class="rank">11</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.083</strong></td><td>164.21</td><td>23.54</td><td>187.75</td><td>0.444</td></tr><tr class=""><td class="rank">12</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.000</strong></td><td>158.21</td><td>120.92</td><td>279.12</td><td>0.000</td></tr></tbody>
+        </table>
+      </div>
+    </div><div class="data-panel panel-3">
+      <div class="table-scroll">
+        <table class="leaderboard-table">
+          <thead><tr><th>Rank</th><th>Model</th><th>Prompt language</th><th>N</th><th>Score</th><th>Prompt tok</th><th>Output tok</th><th>Total tok</th><th>Score / 1k tok</th></tr></thead>
+          <tbody><tr class="leaderboard-best"><td class="rank">1</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.708</strong><span class="best-badge">BEST</span></td><td>259.54</td><td>5.00</td><td>264.54</td><td>2.678</td></tr><tr class="leaderboard-best"><td class="rank">2</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.708</strong><span class="best-badge">BEST</span></td><td>264.54</td><td>5.00</td><td>269.54</td><td>2.628</td></tr><tr class="leaderboard-best"><td class="rank">3</td><td class="model-name">gpt-5.4</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.708</strong><span class="best-badge">BEST</span></td><td>277.54</td><td>5.00</td><td>282.54</td><td>2.507</td></tr><tr class=""><td class="rank">4</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.500</strong></td><td>260.54</td><td>2.38</td><td>262.92</td><td>1.902</td></tr><tr class=""><td class="rank">5</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.458</strong></td><td>265.54</td><td>2.08</td><td>267.62</td><td>1.713</td></tr><tr class=""><td class="rank">6</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.458</strong></td><td>287.88</td><td>4.17</td><td>292.04</td><td>1.569</td></tr><tr class=""><td class="rank">7</td><td class="model-name">gpt-4o</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.417</strong></td><td>278.54</td><td>2.29</td><td>280.83</td><td>1.484</td></tr><tr class=""><td class="rank">8</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.417</strong></td><td>281.88</td><td>7.62</td><td>289.50</td><td>1.439</td></tr><tr class=""><td class="rank">9</td><td class="model-name">qwen3-4b</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.375</strong></td><td>281.88</td><td>62.67</td><td>344.54</td><td>1.088</td></tr><tr class=""><td class="rank">10</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-base">English</span></td><td>24</td><td class="score"><strong>0.208</strong></td><td>281.88</td><td>89.92</td><td>371.79</td><td>0.560</td></tr><tr class=""><td class="rank">11</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-zh">Simplified Chinese</span></td><td>24</td><td class="score"><strong>0.167</strong></td><td>287.88</td><td>137.62</td><td>425.50</td><td>0.392</td></tr><tr class=""><td class="rank">12</td><td class="model-name">qwen3-1.7b</td><td><span class="prompt-pill prompt-wy">Wényán</span></td><td>24</td><td class="score"><strong>0.167</strong></td><td>281.88</td><td>260.46</td><td>542.33</td><td>0.307</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+      </div>
+      <p class="table-note">The corrected matrix uses a uniform 2048-token output budget. All tracks are free of cap hits and empty outputs except qwen3-1.7b, which retains four length truncations. Token counts are most meaningful within a model/backend.</p>
+    </section>
+
+    <section class="section tone-dark">
       <div class="section-head">
         <h2>Reasoning visibility matters too</h2>
         <p>A second three-run study varies whether reasoning is explicit, hidden, or compact-visible while keeping the language conditions fixed.</p>
@@ -172,7 +236,7 @@
       </div>
     </section>
 
-    <section class="method-band" id="method">
+    <section class="method-band tone-soft" id="method">
       <div class="method-grid">
         <div>
           <h2>Manifest-driven and auditable</h2>
@@ -187,13 +251,13 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section tone-dark">
       <div class="notice">
         <strong>Interpretation boundary.</strong> LangMatch is an exploratory study, not evidence that Classical Chinese is universally superior. Token counts are source-native and should be compared within a model/backend; GPT-5.4’s Wényán gain is real in this release, but strongly conditional.
       </div>
     </section>
 
-    <section class="section">
+    <section class="section tone-light">
       <div class="section-head">
         <h2>Reports and reproducibility</h2>
         <p>The public repository includes manifests, runners, aggregated reports, plotting scripts, and publish-safe result artifacts.</p>
