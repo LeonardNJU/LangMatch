@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="LangMatch studies how English, Simplified Chinese, and Classical Chinese change the quality–cost frontier of LLM inference.">
   <meta name="twitter:image" content="https://langmatch.lsamc.website/og-image.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"LangMatch","headline":"LangMatch — Prompt Language as a Quality–Cost Variable","description":"LangMatch studies how English, Simplified Chinese, and Classical Chinese change the quality–cost frontier of LLM inference.","url":"https://langmatch.lsamc.website/","image":"https://langmatch.lsamc.website/og-image.png","inLanguage":"en","author":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"publisher":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"codeRepository":"https://github.com/LeonardNJU/LangMatch","programmingLanguage":"Python"}</script>
-  <link rel="stylesheet" href="styles.css?v=20260715-6">
+  <link rel="stylesheet" href="styles.css?v=20260715-8">
 </head>
 <body>
   <div class="topbar">
@@ -81,7 +81,7 @@
   </section>
 
   <main>
-    <section class="section tone-light" id="findings">
+    <section class="section tone-dark" id="findings">
       <div class="section-head">
         <h2>What the study finds</h2>
         <p>The result is not “one language wins.” Prompt language interacts with model capacity, task type, and reasoning visibility.</p>
@@ -105,7 +105,7 @@
       </div>
     </section>
 
-    <section class="section tone-dark" id="question">
+    <section class="section tone-light" id="question">
       <div class="section-head">
         <h2>One task, three prompt languages</h2>
         <p>Only the system-prompt language changes. The task subset, model backend, evaluator, and output budget stay fixed.</p>
@@ -132,37 +132,39 @@
       </div>
     </section>
 
-<section class="section tone-light" id="example">
+<section class="section tone-dark" id="example">
       <div class="section-head">
         <h2>What does one evaluation item look like?</h2>
-        <p>This uses MATH-500 number-theory/149 from the public compact manifest. Semantics and the gold answer stay fixed, while the Simplified Chinese prompt uses 188 non-whitespace characters and the Wényán version uses 150—about 20% fewer.</p>
+        <p>This public-manifest MATH-500 item keeps the mathematical problem and answer fixed while changing the language used for both reasoning and response. The illustrative outputs make the compression contrast directly visible.</p>
       </div>
-      <div class="shared-task"><span>Shared task and counting rule</span><p>Find the sum of all integers N < 50 such that N leaves remainder 5 modulo 8 and remainder 3 modulo 6. The gold answer is 66. Counts come directly from the public manifest and exclude whitespace; responses below illustrate output form rather than add new measured runs.</p></div>
-      <div class="showcase-grid"><article class="showcase-card showcase-base">
-          <div class="showcase-language"><span>English</span><span class="showcase-count">400 non-space chars</span></div>
-          <div class="showcase-block"><span>Full public-manifest prompt</span><p>Problem / 题目:
-A group of $N$ students, where $N &lt; 50$, is on a field trip. If their teacher puts them in groups of 8, the last group has 5 students. If their teacher instead puts them in groups of 6, the last group has 3 students. What is the sum of all possible values of $N$?
-
-Think carefully in English. You may include a brief reasoning sketch if helpful, but keep it compact and no longer than one short paragraph. Put only the final answer inside &lt;answer&gt;...&lt;/answer&gt;. Do not use \boxed.</p></div>
-          <div class="showcase-block response"><span>Illustrative response · 91 chars</span><p>We need N ≡ 5 (mod 8) and N ≡ 3 (mod 6). Below 50, the solutions are 21 and 45, whose sum is 66. &lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article><article class="showcase-card showcase-zh">
-          <div class="showcase-language"><span>Simplified Chinese</span><span class="showcase-count">188 non-space chars</span></div>
-          <div class="showcase-block"><span>Full public-manifest prompt</span><p>题目：
-一组学生共有 $N$ 人，其中 $N &lt; 50$，正在进行一次实地考察。如果老师把他们分成每组 8 人，那么最后一组有 5 名学生。如果老师改为把他们分成每组 6 人，那么最后一组有 3 名学生。$N$ 的所有可能取值之和是多少？
-
-请用中文仔细思考。如有必要，可以写一小段简短推理，但整体必须简洁，且不要超过一个短段。只将最终答案放在&lt;answer&gt;...&lt;/answer&gt;中。不要使用\boxed。</p></div>
-          <div class="showcase-block response"><span>Illustrative response · 76 chars</span><p>条件等价于 N ≡ 5 (mod 8) 且 N ≡ 3 (mod 6)。在 N &lt; 50 时，符合条件的 N 为 21 和 45，故所有可能值之和为 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article><article class="showcase-card showcase-wy">
-          <div class="showcase-language"><span>Wényán</span><span class="showcase-count">150 non-space chars</span></div>
-          <div class="showcase-block"><span>Full public-manifest prompt</span><p>題目：
-有學生 $N$ 人，且 $N &lt; 50$，出遊於野。若其師以每組 8 人分之，則末組有 5 人。若其師改以每組 6 人分之，則末組有 3 人。問 $N$ 之一切可能值之和為何？
-
-請以文言審思。若有必要，得略陳其理，然務須簡勁，且毋過一短段。惟最終答案須且僅須置於&lt;answer&gt;...&lt;/answer&gt;之內。勿用\boxed。</p></div>
-          <div class="showcase-block response"><span>Illustrative response · 60 chars</span><p>由 N ≡ 5 (mod 8)、N ≡ 3 (mod 6)，且 N &lt; 50，得 N = 21、45，和為 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article></div>
+      <div class="shared-task">
+        <span>Shared task · MATH-500 number-theory/820</span>
+        <p>Given positive integers <em>a</em> and <em>b</em> with gcd(<em>a</em>,<em>b</em>) = 210, lcm(<em>a</em>,<em>b</em>) = 210³, and <em>a</em> &lt; <em>b</em>, determine how many values <em>a</em> can take. Gold answer: 8.</p>
+      </div>
+      <div class="showcase-grid">
+        <article class="showcase-card showcase-base">
+          <div class="showcase-language"><span>English</span><span class="showcase-count">Task 143 · Output 182</span></div>
+          <div class="showcase-block task"><span>Task rendering from the public manifest</span><p>Problem / 题目:
+If a and b are positive integers such that gcd(a,b)=210, lcm(a,b)=210³, and a&lt;b, how many possible values are there for a?</p></div>
+          <div class="showcase-block response"><span>Illustrative response · non-space characters</span><p>Let a=210x and b=210y. Then gcd(x,y)=1 and xy=210²=2²·3²·5²·7². Each prime-square factor must go wholly to one of x,y, giving 2⁴=16 ordered assignments. Since a&lt;b, exactly half remain. &lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+        <article class="showcase-card showcase-zh">
+          <div class="showcase-language"><span>Simplified Chinese</span><span class="showcase-count">Task 98 · Output 165</span></div>
+          <div class="showcase-block task"><span>公开 Manifest 中的题面</span><p>题目 / Problem：
+如果 a 和 b 是正整数，且 gcd(a,b)=210，lcm(a,b)=210³，并且 a&lt;b，那么 a 有多少个可能的取值？</p></div>
+          <div class="showcase-block response"><span>输出示意 · 非空白字符</span><p>令 a=210x，b=210y。由 gcd(a,b)=210 可知 gcd(x,y)=1；再由 lcm(a,b)=210³ 得 xy=210²=2²·3²·5²·7²。因为 x 与 y 互质，每个素因子的平方必须整体分配给其中一方，共有 2⁴=16 种有序分配。条件 a&lt;b 恰好保留一半，所以 a 有 8 个可能值。&lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+        <article class="showcase-card showcase-wy">
+          <div class="showcase-language"><span>Wényán</span><span class="showcase-count">Task 86 · Output 95</span></div>
+          <div class="showcase-block task"><span>公開 Manifest 中之題面</span><p>題目：
+若 a 與 b 為正整數，且 gcd(a,b)=210，lcm(a,b)=210³，並且 a&lt;b，則 a 之可能值有幾何？</p></div>
+          <div class="showcase-block response"><span>示例輸出 · 非空白字符</span><p>令 a=210x，b=210y，則 (x,y)=1，而 xy=210²=2²·3²·5²·7²。四素之方各歸一數，凡 2⁴ 配；以 a&lt;b，取其半，故八。&lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+      </div>
+      <p class="showcase-note">Task counts cover the displayed task rendering; output counts include the required answer tag. These responses illustrate the format and are not additional leaderboard runs.</p>
     </section>
 
-    <section class="section tone-dark" id="results">
+    <section class="section tone-light" id="results">
       <div class="section-head">
         <h2>Corrected main matrix</h2>
         <p>The 2048-token rerun removes the largest truncation artifact from the pilot and reports score together with total inference tokens.</p>
@@ -183,7 +185,7 @@ Think carefully in English. You may include a brief reasoning sketch if helpful,
       </div>
     </section>
 
-<section class="section tone-light" id="data">
+<section class="section tone-dark" id="data">
       <div class="section-head">
         <h2>Detailed results</h2>
         <p>Switch between the aggregate view and each benchmark to inspect score, token cost, and cost-normalized efficiency for every model–language pair.</p>
@@ -224,7 +226,7 @@ Think carefully in English. You may include a brief reasoning sketch if helpful,
       <p class="table-note">The corrected matrix uses a uniform 2048-token output budget. All tracks are free of cap hits and empty outputs except qwen3-1.7b, which retains four length truncations. Token counts are most meaningful within a model/backend.</p>
     </section>
 
-    <section class="section tone-dark">
+    <section class="section tone-light">
       <div class="section-head">
         <h2>Reasoning visibility matters too</h2>
         <p>A second three-run study varies whether reasoning is explicit, hidden, or compact-visible while keeping the language conditions fixed.</p>

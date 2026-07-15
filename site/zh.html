@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="LangMatch 研究英文、简体中文与文言文如何改变大模型推理的质量–成本前沿。">
   <meta name="twitter:image" content="https://langmatch.lsamc.website/og-image.png">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"LangMatch","headline":"LangMatch —— 提示语言也是质量–成本变量","description":"LangMatch 研究英文、简体中文与文言文如何改变大模型推理的质量–成本前沿。","url":"https://langmatch.lsamc.website/zh.html","image":"https://langmatch.lsamc.website/og-image.png","inLanguage":"zh-CN","author":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"publisher":{"@type":"Person","name":"Leonard Li","url":"https://lsamc.website/"},"codeRepository":"https://github.com/LeonardNJU/LangMatch","programmingLanguage":"Python"}</script>
-  <link rel="stylesheet" href="styles.css?v=20260715-6">
+  <link rel="stylesheet" href="styles.css?v=20260715-8">
 </head>
 <body>
   <div class="topbar">
@@ -81,7 +81,7 @@
   </section>
 
   <main>
-    <section class="section tone-light" id="findings">
+    <section class="section tone-dark" id="findings">
       <div class="section-head">
         <h2>实验真正发现了什么</h2>
         <p>结论不是“某种语言全面获胜”。提示语言会与模型能力、任务类型和推理可见形式发生明显交互。</p>
@@ -105,7 +105,7 @@
       </div>
     </section>
 
-    <section class="section tone-dark" id="question">
+    <section class="section tone-light" id="question">
       <div class="section-head">
         <h2>同一任务，三种提示语言</h2>
         <p>只改 system prompt 的语言；任务子集、模型后端、评分器与输出预算全部固定。</p>
@@ -132,37 +132,39 @@
       </div>
     </section>
 
-<section class="section tone-light" id="example">
+<section class="section tone-dark" id="example">
       <div class="section-head">
         <h2>一条评测样本长什么样？</h2>
-        <p>这里改用公开 compact manifest 中的 MATH-500 number-theory/149。题意与答案完全相同，但简体中文题面为 188 个非空白字符，文言文仅 150 个，缩短约 20%。</p>
+        <p>这道公开 Manifest 中的 MATH-500 题保持数学问题与正确答案不变，只改变推理和作答所用语言。下面的输出示意可以直接看出文言表达的压缩幅度。</p>
       </div>
-      <div class="shared-task"><span>共同任务与计数口径</span><p>求所有满足 N < 50、N 除以 8 余 5、N 除以 6 余 3 的整数 N 之和。正确答案为 66。字符数直接取自公开 manifest，并排除空白；下面的回答仅用于展示输出形式，不作为新增实测数据。</p></div>
-      <div class="showcase-grid"><article class="showcase-card showcase-base">
-          <div class="showcase-language"><span>English</span><span class="showcase-count">400 非空白字符</span></div>
-          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>Problem / 题目:
-A group of $N$ students, where $N &lt; 50$, is on a field trip. If their teacher puts them in groups of 8, the last group has 5 students. If their teacher instead puts them in groups of 6, the last group has 3 students. What is the sum of all possible values of $N$?
-
-Think carefully in English. You may include a brief reasoning sketch if helpful, but keep it compact and no longer than one short paragraph. Put only the final answer inside &lt;answer&gt;...&lt;/answer&gt;. Do not use \boxed.</p></div>
-          <div class="showcase-block response"><span>输出示意 · 91 chars</span><p>We need N ≡ 5 (mod 8) and N ≡ 3 (mod 6). Below 50, the solutions are 21 and 45, whose sum is 66. &lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article><article class="showcase-card showcase-zh">
-          <div class="showcase-language"><span>简体中文</span><span class="showcase-count">188 非空白字符</span></div>
-          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>题目：
-一组学生共有 $N$ 人，其中 $N &lt; 50$，正在进行一次实地考察。如果老师把他们分成每组 8 人，那么最后一组有 5 名学生。如果老师改为把他们分成每组 6 人，那么最后一组有 3 名学生。$N$ 的所有可能取值之和是多少？
-
-请用中文仔细思考。如有必要，可以写一小段简短推理，但整体必须简洁，且不要超过一个短段。只将最终答案放在&lt;answer&gt;...&lt;/answer&gt;中。不要使用\boxed。</p></div>
-          <div class="showcase-block response"><span>输出示意 · 76 chars</span><p>条件等价于 N ≡ 5 (mod 8) 且 N ≡ 3 (mod 6)。在 N &lt; 50 时，符合条件的 N 为 21 和 45，故所有可能值之和为 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article><article class="showcase-card showcase-wy">
-          <div class="showcase-language"><span>文言文</span><span class="showcase-count">150 非空白字符</span></div>
-          <div class="showcase-block"><span>公开 Manifest 中的完整题面</span><p>題目：
-有學生 $N$ 人，且 $N &lt; 50$，出遊於野。若其師以每組 8 人分之，則末組有 5 人。若其師改以每組 6 人分之，則末組有 3 人。問 $N$ 之一切可能值之和為何？
-
-請以文言審思。若有必要，得略陳其理，然務須簡勁，且毋過一短段。惟最終答案須且僅須置於&lt;answer&gt;...&lt;/answer&gt;之內。勿用\boxed。</p></div>
-          <div class="showcase-block response"><span>输出示意 · 60 chars</span><p>由 N ≡ 5 (mod 8)、N ≡ 3 (mod 6)，且 N &lt; 50，得 N = 21、45，和為 66。&lt;answer&gt;66&lt;/answer&gt;</p></div>
-        </article></div>
+      <div class="shared-task">
+        <span>共同任务 · MATH-500 number-theory/820</span>
+        <p>正整数 <em>a</em>、<em>b</em> 满足 gcd(<em>a</em>,<em>b</em>) = 210、lcm(<em>a</em>,<em>b</em>) = 210³ 且 <em>a</em> &lt; <em>b</em>，求 <em>a</em> 有多少个可能值。正确答案为 8。</p>
+      </div>
+      <div class="showcase-grid">
+        <article class="showcase-card showcase-base">
+          <div class="showcase-language"><span>English</span><span class="showcase-count">题面 143 · 输出 182</span></div>
+          <div class="showcase-block task"><span>公开 Manifest 中的题面</span><p>Problem / 题目:
+If a and b are positive integers such that gcd(a,b)=210, lcm(a,b)=210³, and a&lt;b, how many possible values are there for a?</p></div>
+          <div class="showcase-block response"><span>输出示意 · 非空白字符</span><p>Let a=210x and b=210y. Then gcd(x,y)=1 and xy=210²=2²·3²·5²·7². Each prime-square factor must go wholly to one of x,y, giving 2⁴=16 ordered assignments. Since a&lt;b, exactly half remain. &lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+        <article class="showcase-card showcase-zh">
+          <div class="showcase-language"><span>简体中文</span><span class="showcase-count">题面 98 · 输出 165</span></div>
+          <div class="showcase-block task"><span>公开 Manifest 中的题面</span><p>题目 / Problem：
+如果 a 和 b 是正整数，且 gcd(a,b)=210，lcm(a,b)=210³，并且 a&lt;b，那么 a 有多少个可能的取值？</p></div>
+          <div class="showcase-block response"><span>输出示意 · 非空白字符</span><p>令 a=210x，b=210y。由 gcd(a,b)=210 可知 gcd(x,y)=1；再由 lcm(a,b)=210³ 得 xy=210²=2²·3²·5²·7²。因为 x 与 y 互质，每个素因子的平方必须整体分配给其中一方，共有 2⁴=16 种有序分配。条件 a&lt;b 恰好保留一半，所以 a 有 8 个可能值。&lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+        <article class="showcase-card showcase-wy">
+          <div class="showcase-language"><span>文言文</span><span class="showcase-count">题面 86 · 输出 95</span></div>
+          <div class="showcase-block task"><span>公開 Manifest 中之題面</span><p>題目：
+若 a 與 b 為正整數，且 gcd(a,b)=210，lcm(a,b)=210³，並且 a&lt;b，則 a 之可能值有幾何？</p></div>
+          <div class="showcase-block response"><span>輸出示意 · 非空白字符</span><p>令 a=210x，b=210y，則 (x,y)=1，而 xy=210²=2²·3²·5²·7²。四素之方各歸一數，凡 2⁴ 配；以 a&lt;b，取其半，故八。&lt;answer&gt;8&lt;/answer&gt;</p></div>
+        </article>
+      </div>
+      <p class="showcase-note">题面字符数只统计上方实际展示的题面；输出字符数包含必须保留的 answer 标签。三条回答仅用于展示输出形式，不作为新增实测结果。</p>
     </section>
 
-    <section class="section tone-dark" id="results">
+    <section class="section tone-light" id="results">
       <div class="section-head">
         <h2>修正后的主矩阵</h2>
         <p>2048-token 重跑消除了 pilot 中最大的截断伪影，并把任务分数与总推理 token 放在同一张图上报告。</p>
@@ -183,7 +185,7 @@ Think carefully in English. You may include a brief reasoning sketch if helpful,
       </div>
     </section>
 
-<section class="section tone-light" id="data">
+<section class="section tone-dark" id="data">
       <div class="section-head">
         <h2>完整数据表</h2>
         <p>切换总体与三个基准，查看每个模型–语言组合的得分、词元成本和单位成本效率。排名先按得分降序，再按总词元升序。</p>
@@ -224,7 +226,7 @@ Think carefully in English. You may include a brief reasoning sketch if helpful,
       <p class="table-note">主矩阵采用统一的 2048 输出预算。除 qwen3-1.7b 尚有 4 次长度截断外，其余模型没有触顶或空输出。词元统计应主要在同一模型与后端内部比较。</p>
     </section>
 
-    <section class="section tone-dark">
+    <section class="section tone-light">
       <div class="section-head">
         <h2>推理可见性同样重要</h2>
         <p>第二轮三组实验固定语言条件，改为比较显式过程、隐藏推理与紧凑可见推理。</p>
